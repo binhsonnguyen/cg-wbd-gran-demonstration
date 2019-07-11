@@ -1,6 +1,6 @@
 package cg.wbd.grandemonstration.model;
 
-public class Customer {
+public class Customer implements Cloneable {
     private Long id;
     private String name;
     private String email;
@@ -52,5 +52,15 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public Customer clone() {
+        Customer customer = new Customer();
+        customer.setId(id);
+        customer.setName(name);
+        customer.setEmail(email);
+        customer.setAddress(address);
+        return customer;
     }
 }
