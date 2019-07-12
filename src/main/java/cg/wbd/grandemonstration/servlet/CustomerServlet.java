@@ -13,7 +13,19 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String template = "There are an %s customer(s) in list.";
+        String template =
+                "There are an %s customer(s) in list." +
+                "<table>" +
+                "  <caption>Customer List</caption>" +
+                "  <thead>" +
+                "  <tr>" +
+                "    <th>ID</th>" +
+                "    <th>Name</th>" +
+                "    <th>Email</th>" +
+                "    <th>Address</th>" +
+                "  </tr>" +
+                "  </thead>" +
+                "</table>";
         long customerCount = CUSTOMER_SERVICE.count();
         String view = String.format(template, customerCount);
         resp.getOutputStream().println(view);
