@@ -29,5 +29,6 @@ public class CustomerServlet extends HttpServlet {
         long customerCount = CUSTOMER_SERVICE.count();
         String view = String.format(template, customerCount);
         resp.getOutputStream().println(view);
+        resp.setContentType("text/html");
     }
 }
