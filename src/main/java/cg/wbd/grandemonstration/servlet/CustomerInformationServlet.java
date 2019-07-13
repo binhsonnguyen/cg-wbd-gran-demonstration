@@ -65,6 +65,6 @@ public class CustomerInformationServlet extends HttpServlet {
         customer.setEmail(req.getParameter("email"));
         customer.setAddress(req.getParameter("address"));
         customerService.save(customer);
-        resp.getOutputStream().println("Update successfully!");
+        resp.sendRedirect("/customers");
     }
 }
