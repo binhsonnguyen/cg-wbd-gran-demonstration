@@ -17,6 +17,7 @@ public class CustomerInformationServlet extends HttpServlet {
         Long id = Long.valueOf(req.getParameter("id"));
         Customer customer = customerService.findOne(id);
         StringBuilder viewBuilder = new StringBuilder()
+                .append("<form method='post'>")
                 .append("<fieldset>")
                 .append("  <legend>Customer Information</legend>")
                 .append("  <table>")
@@ -44,8 +45,14 @@ public class CustomerInformationServlet extends HttpServlet {
                         "        <input type='text' value='%s'>", customer.getAddress()))
                 .append("      </td>")
                 .append("    </tr>")
+                .append("    <tr>")
+                .append("      <td colspan='2'>")
+                .append("        <input type='submit' value='Update'>")
+                .append("      </td>")
+                .append("    </tr>")
                 .append("  </table>")
                 .append("</fieldset>")
+                .append("</form>")
                 .append("<a href='/customers'>Back to list</a>.");
         resp.getOutputStream().println(viewBuilder.toString());
         resp.setContentType("text/html");
