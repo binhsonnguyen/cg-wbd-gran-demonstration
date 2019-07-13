@@ -57,4 +57,9 @@ public class CustomerInformationServlet extends HttpServlet {
         resp.getOutputStream().println(viewBuilder.toString());
         resp.setContentType("text/html");
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.getOutputStream().println("Update successfully!");
+    }
 }
