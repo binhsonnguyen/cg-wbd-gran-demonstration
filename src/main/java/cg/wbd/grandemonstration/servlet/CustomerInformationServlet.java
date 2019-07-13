@@ -60,6 +60,12 @@ public class CustomerInformationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Customer customer = new Customer();
+        customer.setId(Long.valueOf(req.getParameter("id")));
+        customer.setName(req.getParameter("name"));
+        customer.setEmail(req.getParameter("email"));
+        customer.setAddress(req.getParameter("address"));
+        customerService.save(customer);
         resp.getOutputStream().println("Update successfully!");
     }
 }
