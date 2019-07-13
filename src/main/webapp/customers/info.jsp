@@ -11,11 +11,12 @@
 <form action="/customers" method="post">
 <fieldset>
     <legend>Customer Information</legend>
+    <input type="hidden" value="<%= customer.getId() %>">
     <table>
         <tr>
             <td>Id</td>
             <td>
-                <input type="text" value="<%= customer.getId() %>">
+                <%= customer.getId() %>
             </td>
         </tr>
         <tr>
