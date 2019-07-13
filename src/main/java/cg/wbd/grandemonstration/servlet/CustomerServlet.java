@@ -2,7 +2,7 @@ package cg.wbd.grandemonstration.servlet;
 
 import cg.wbd.grandemonstration.model.Customer;
 import cg.wbd.grandemonstration.service.CustomerService;
-import cg.wbd.grandemonstration.service.impl.SimpleCustomerServiceImpl;
+import cg.wbd.grandemonstration.servicefactory.CustomerServiceFactory;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,11 +11,11 @@ import java.io.IOException;
 import java.util.List;
 
 public class CustomerServlet extends HttpServlet {
-    private static final CustomerService CUSTOMER_SERVICE = new SimpleCustomerServiceImpl();
+    private CustomerService customerService = CustomerServiceFactory.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        long customerCount = CUSTOMER_SERVICE.count();
+        long customerCount = customerService.count();
         StringBuilder viewBuilder = new StringBuilder()
                 .append(String.format("There are an %s customer(s) in list.", customerCount))
                 .append("<table>")
@@ -30,12 +30,12 @@ public class CustomerServlet extends HttpServlet {
                 .append("  </thead>")
                 .append("  <tbody>");
 
-        List<Customer> customers = CUSTOMER_SERVICE.findAll();
+        List<Customer> customers = customerService.findAll();
         for (Customer c : customers) {
             viewBuilder
                     .append("  <tr>")
                     .append(String.format("    <td>%d</td>", c.getId()))
-                    .append(String.format("    <td><a href='customers/info?id=%d'>%s</a></td>",c.getId(), c.getName()))
+                    .append(String.format("    <td><a href='customers/info?id=%d'>%s</a></td>", c.getId(), c.getName()))
                     .append(String.format("    <td>%s</td>", c.getEmail()))
                     .append(String.format("    <td>%s</td>", c.getAddress()))
                     .append("  </tr>");
