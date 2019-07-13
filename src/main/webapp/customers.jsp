@@ -6,4 +6,27 @@
 <%
     long count = customerService.count();
 %>
+<style>
+    table {
+        border: 1px solid #000;
+    }
+
+    th, td {
+        border: 1px dotted #555;
+    }
+</style>
 There are <%= count %> customer(s) in list.
+<table>
+    <caption>Customers List</caption>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
