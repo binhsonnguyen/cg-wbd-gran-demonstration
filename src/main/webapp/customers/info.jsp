@@ -8,6 +8,7 @@
     Long id = Long.valueOf(request.getParameter("id"));
     Customer customer = customerService.findOne(id);
 %>
+<form action="/customers" method="post">
 <fieldset>
     <legend>Customer Information</legend>
     <table>
@@ -35,6 +36,12 @@
                 <input type="text" value="<%= customer.getAddress() %>">
             </td>
         </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Update">
+            </td>
+        </tr>
     </table>
 </fieldset>
+</form>
 <a href="/customers/list.jsp">Back to list</a>.
