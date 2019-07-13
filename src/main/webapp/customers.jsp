@@ -1,10 +1,13 @@
 <%@ page import="cg.wbd.grandemonstration.service.CustomerService" %>
 <%@ page import="cg.wbd.grandemonstration.service.CustomerServiceFactory" %>
+<%@ page import="cg.wbd.grandemonstration.model.Customer" %>
+<%@ page import="java.util.List" %>
 <%!
     private CustomerService customerService = CustomerServiceFactory.getInstance();
 %>
 <%
     long count = customerService.count();
+    List<Customer> customers = customerService.findAll();
 %>
 <style>
     table {
@@ -27,6 +30,21 @@ There are <%= count %> customer(s) in list.
     </tr>
     </thead>
     <tbody>
-
+    <% for (Customer c : customers) { %>
+    <tr>
+        <td>
+            <%= c.getId() %>
+        </td>
+        <td>
+            <%= c.getName() %>
+        </td>
+        <td>
+            <%= c.getEmail() %>
+        </td>
+        <td>
+            <%= c.getAddress() %>
+        </td>
+    </tr>
+    <% } %>
     </tbody>
 </table>
