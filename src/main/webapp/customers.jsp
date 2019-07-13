@@ -36,7 +36,7 @@ There are <%= count %> customer(s) in list.
             <%= c.getId() %>
         </td>
         <td>
-            <%= c.getName() %>
+            <a href="info.jsp?id=<%= c.getId() %>"><%= c.getName() %></a>
         </td>
         <td>
             <%= c.getEmail() %>
