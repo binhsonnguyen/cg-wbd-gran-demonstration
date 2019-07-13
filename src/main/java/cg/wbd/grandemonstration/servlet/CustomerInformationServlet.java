@@ -19,13 +19,12 @@ public class CustomerInformationServlet extends HttpServlet {
         StringBuilder viewBuilder = new StringBuilder()
                 .append("<form method='post'>")
                 .append("<fieldset>")
-                .append("  <legend>Customer Information</legend>")
+                .append("  <legend>Customer Information</legend>").append(String.format(
+                        "  <input type='hidden' name='id' value='%d'>", customer.getId()))
                 .append("  <table>")
                 .append("    <tr>")
-                .append("      <td>Id</td>")
-                .append("      <td>").append(String.format(
-                        "        <input type='text' name='id' value='%d'>", customer.getId()))
-                .append("      </td>")
+                .append("      <td>Id</td>").append(String.format(
+                        "      <td>%s</td>", customer.getId()))
                 .append("    </tr>")
                 .append("    <tr>")
                 .append("      <td>Name</td>")
