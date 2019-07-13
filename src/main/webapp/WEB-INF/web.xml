@@ -8,8 +8,16 @@
     <servlet-name>customers</servlet-name>
     <servlet-class>cg.wbd.grandemonstration.servlet.CustomerServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>customer-information</servlet-name>
+    <servlet-class>cg.wbd.grandemonstration.servlet.CustomerInformationServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>customers</servlet-name>
     <url-pattern>/customers</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>customer-information</servlet-name>
+    <url-pattern>/customers/info</url-pattern>
   </servlet-mapping>
 </web-app>
