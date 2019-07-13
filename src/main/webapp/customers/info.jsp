@@ -11,7 +11,7 @@
 <form action="/customers" method="post">
 <fieldset>
     <legend>Customer Information</legend>
-    <input type="hidden" value="<%= customer.getId() %>">
+    <input type="hidden" name="id" value="<%= customer.getId() %>">
     <table>
         <tr>
             <td>Id</td>
@@ -22,19 +22,19 @@
         <tr>
             <td>Name</td>
             <td>
-                <input type="text" value="<%= customer.getName() %>">
+                <input type="text" name="name" value="<%= customer.getName() %>">
             </td>
         </tr>
         <tr>
             <td>Email</td>
             <td>
-                <input type="text" value="<%= customer.getEmail() %>">
+                <input type="text" name="email" value="<%= customer.getEmail() %>">
             </td>
         </tr>
         <tr>
             <td>Address</td>
             <td>
-                <input type="text" value="<%= customer.getAddress() %>">
+                <input type="text" name="address" value="<%= customer.getAddress() %>">
             </td>
         </tr>
         <tr>
