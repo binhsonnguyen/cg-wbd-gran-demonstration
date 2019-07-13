@@ -35,7 +35,7 @@ public class CustomerServlet extends HttpServlet {
             viewBuilder
                     .append("  <tr>")
                     .append(String.format("    <td>%d</td>", c.getId()))
-                    .append(String.format("    <td><a href='#'>%s</a></td>", c.getName()))
+                    .append(String.format("    <td><a href='customers/info?id=%d'>%s</a></td>",c.getId(), c.getName()))
                     .append(String.format("    <td>%s</td>", c.getEmail()))
                     .append(String.format("    <td>%s</td>", c.getAddress()))
                     .append("  </tr>");
