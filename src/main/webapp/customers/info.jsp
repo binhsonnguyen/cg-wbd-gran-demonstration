@@ -37,3 +37,4 @@
         </tr>
     </table>
 </fieldset>
+<a href="/customers/list.jsp">Back to list</a>.
