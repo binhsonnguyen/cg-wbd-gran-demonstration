@@ -50,6 +50,8 @@ public class CustomerController extends HttpServlet {
 
     private void showInformation(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        Long id = Long.valueOf(req.getParameter("id"));
+        req.setAttribute("customer", customerService.findOne(id));
         RequestDispatcher dispatcher = req.getRequestDispatcher("/customers/info.jsp");
         dispatcher.forward(req, resp);
     }
