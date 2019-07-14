@@ -38,6 +38,8 @@ public class CustomerController {
             @RequestParam String email,
             @RequestParam String address
     ) {
+        Customer customer = new Customer(id, name, email, address);
+        customerService.save(customer);
         return "redirect:/customers";
     }
 }
