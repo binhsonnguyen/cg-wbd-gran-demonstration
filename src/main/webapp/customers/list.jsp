@@ -1,12 +1,6 @@
-<%@ page import="cg.wbd.grandemonstration.service.CustomerService" %>
-<%@ page import="cg.wbd.grandemonstration.service.CustomerServiceFactory" %>
 <%@ page import="cg.wbd.grandemonstration.model.Customer" %>
 <%@ page import="java.util.List" %>
-<%!
-    private CustomerService customerService = CustomerServiceFactory.getInstance();
-%>
 <%
-    long count = customerService.count();
     List<Customer> customers = (List<Customer>) request.getAttribute("customers");
 %>
 <style>
@@ -18,7 +12,7 @@
         border: 1px dotted #555;
     }
 </style>
-There are <%= count %> customer(s) in list.
+There are <%= customers.size() %> customer(s) in list.
 <table>
     <caption>Customers List</caption>
     <thead>
@@ -36,7 +30,8 @@ There are <%= count %> customer(s) in list.
             <%= c.getId() %>
         </td>
         <td>
-            <a href="info.jsp?id=<%= c.getId() %>"><%= c.getName() %></a>
+            <a href="info.jsp?id=<%= c.getId() %>"><%= c.getName() %>
+            </a>
         </td>
         <td>
             <%= c.getEmail() %>
