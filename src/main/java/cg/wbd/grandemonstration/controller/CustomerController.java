@@ -13,6 +13,11 @@ public class CustomerController extends HttpServlet {
     private CustomerService customerService = CustomerServiceFactory.getInstance();
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.sendRedirect("/customers/list.jsp");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Customer customer = new Customer();
         customer.setName(req.getParameter("name"));
