@@ -1,5 +1,10 @@
 package cg.wbd.grandemonstration.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Customers")
 public class Customer implements Cloneable {
     private Long id;
     private String name;
