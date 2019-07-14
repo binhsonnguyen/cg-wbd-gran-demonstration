@@ -26,6 +26,8 @@ public class CustomerController {
     @GetMapping("/customers/{id}")
     public ModelAndView showInformation(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("customers/info");
+        Customer customer = customerService.findOne(id);
+        modelAndView.addObject("customer", customer);
         return modelAndView;
     }
 }
