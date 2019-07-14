@@ -12,20 +12,24 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CustomerController extends HttpServlet {
+    private static final String ACTION_EDIT = "EDIT";
+
     private CustomerService customerService = CustomerServiceFactory.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException {
-        String action = req.getParameter("action");
-        if (action == null || action.isEmpty()) {
-            req.setAttribute("customers", customerService.findAll());
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/customers/list.jsp");
-            dispatcher.forward(req, resp);
-        } else if (action.equals("edit")){
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/customers/info.jsp");
-            dispatcher.forward(req, resp);
+        String action = getActionValue(req);
+        if (isDefault(action)) {
+            showList(req, resp);
+        } else if (isEdit(action)) {
+            showInformation(req, resp);
         }
+    }
+
+    private String getActionValue(HttpServletRequest req) {
+        String action = req.getParameter("action");
+        return action == null ? "" : action.toUpperCase();
     }
 
     @Override
@@ -40,5 +44,26 @@ public class CustomerController extends HttpServlet {
         customerService.save(customer);
 
         resp.sendRedirect("/customers/list.jsp");
+    }
+
+    private void showList(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        req.setAttribute("customers", customerService.findAll());
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/customers/list.jsp");
+        dispatcher.forward(req, resp);
+    }
+
+    private void showInformation(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/customers/info.jsp");
+        dispatcher.forward(req, resp);
+    }
+
+    private boolean isDefault(String action) {
+        return action.isEmpty();
+    }
+
+    private boolean isEdit(String action) {
+        return action.equals(ACTION_EDIT);
     }
 }
