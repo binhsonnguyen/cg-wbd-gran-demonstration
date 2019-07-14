@@ -7,7 +7,7 @@
 %>
 <%
     long count = customerService.count();
-    List<Customer> customers = customerService.findAll();
+    List<Customer> customers = (List<Customer>) request.getAttribute("customers");
 %>
 <style>
     table {
