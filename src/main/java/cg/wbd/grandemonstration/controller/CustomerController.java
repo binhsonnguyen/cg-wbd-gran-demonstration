@@ -38,7 +38,7 @@ public class CustomerController extends HttpServlet {
         customer.setId(id);
         customerService.save(customer);
 
-        resp.sendRedirect("/customers/list.jsp");
+        resp.sendRedirect("/customers");
     }
 
     private void showList(HttpServletRequest req, HttpServletResponse resp)
