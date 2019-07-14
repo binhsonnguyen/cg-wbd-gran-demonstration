@@ -1,4 +1,4 @@
-package cg.wbd.grandemonstration.servlet;
+package cg.wbd.grandemonstration.controller;
 
 import cg.wbd.grandemonstration.model.Customer;
 import cg.wbd.grandemonstration.service.CustomerService;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class CustomerServlet extends HttpServlet {
+public class CustomerController extends HttpServlet {
     private CustomerService customerService = CustomerServiceFactory.getInstance();
 
     @Override
