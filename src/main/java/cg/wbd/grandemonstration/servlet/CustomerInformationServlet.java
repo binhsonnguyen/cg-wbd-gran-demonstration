@@ -45,7 +45,8 @@ public class CustomerInformationServlet extends HttpServlet {
                 .append("      </td>")
                 .append("    </tr>")
                 .append("  </table>")
-                .append("</fieldset>");
+                .append("</fieldset>")
+                .append("<a href='/customers'>Back to list</a>.");
         resp.getOutputStream().println(viewBuilder.toString());
         resp.setContentType("text/html");
     }
