@@ -4,6 +4,8 @@ import cg.wbd.grandemonstration.model.Customer;
 import cg.wbd.grandemonstration.service.CustomerService;
 import cg.wbd.grandemonstration.service.CustomerServiceFactory;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +15,10 @@ public class CustomerController extends HttpServlet {
     private CustomerService customerService = CustomerServiceFactory.getInstance();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.sendRedirect("/customers/list.jsp");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws IOException, ServletException {
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/customers/list.jsp");
+        dispatcher.forward(req, resp);
     }
 
     @Override
