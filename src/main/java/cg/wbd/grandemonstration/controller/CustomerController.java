@@ -17,9 +17,15 @@ public class CustomerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException {
-        req.setAttribute("customers", customerService.findAll());
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/customers/list.jsp");
-        dispatcher.forward(req, resp);
+        String action = req.getParameter("action");
+        if (action == null || action.isEmpty()) {
+            req.setAttribute("customers", customerService.findAll());
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/customers/list.jsp");
+            dispatcher.forward(req, resp);
+        } else if (action.equals("edit")){
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/customers/info.jsp");
+            dispatcher.forward(req, resp);
+        }
     }
 
     @Override
