@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Customer List</title>
 </head>
 <body>
-There an unknown customer(s).
+There are <span th:text="${customers.size()}"></span> customer(s).
 </body>
 </html>
