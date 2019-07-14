@@ -35,8 +35,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public String updateCustomer(Long id, String name, String email, String address) {
-        Customer customer = new Customer(id, name, email, address);
+    public String updateCustomer(Customer customer) {
         customerService.save(customer);
         return "redirect:/customers";
     }
