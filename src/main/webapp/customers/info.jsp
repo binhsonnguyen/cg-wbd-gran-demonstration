@@ -45,4 +45,4 @@
     </table>
 </fieldset>
 </form>
-<a href="/customers/list.jsp">Back to list</a>.
+<a href="/customers">Back to list</a>.
