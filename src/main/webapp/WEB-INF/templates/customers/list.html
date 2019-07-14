@@ -27,10 +27,10 @@ There are <span th:text="${customers.size()}"></span> customer(s).
   </thead>
   <tbody>
   <tr th:each="c : ${customers}">
-    <td th:text="${c.getId()}"></td>
-    <td th:text="${c.getName()}"></td>
-    <td th:text="${c.getEmail()}"></td>
-    <td th:text="${c.getAddress()}"></td>
+    <td th:text="${c.id}"></td>
+    <td th:text="${c.name}"></td>
+    <td th:text="${c.email}"></td>
+    <td th:text="${c.address}"></td>
   </tr>
   </tbody>
 </table>
