@@ -28,7 +28,9 @@ There are <span th:text="${customers.size()}"></span> customer(s).
   <tbody>
   <tr th:each="c : ${customers}">
     <td th:text="${c.id}"></td>
-    <td th:text="${c.name}"></td>
+    <td>
+      <a th:href="@{/customers/{id}(id=${c.id})}" th:text="${c.name}"></a>
+    </td>
     <td th:text="${c.email}"></td>
     <td th:text="${c.address}"></td>
   </tr>
