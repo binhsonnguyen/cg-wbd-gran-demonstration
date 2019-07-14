@@ -29,15 +29,8 @@ public class CustomerController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Customer customer = new Customer();
-        customer.setName(req.getParameter("name"));
-        customer.setEmail(req.getParameter("email"));
-        customer.setAddress(req.getParameter("address"));
-
-        Long id = Long.valueOf(req.getParameter("id"));
-        customer.setId(id);
+        Customer customer = parseCustomer(req);
         customerService.save(customer);
-
         resp.sendRedirect("/customers");
     }
 
