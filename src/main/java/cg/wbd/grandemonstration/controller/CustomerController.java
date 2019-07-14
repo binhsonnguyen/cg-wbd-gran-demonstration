@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class CustomerController extends HttpServlet {
-    private static final String ACTION_EDIT = "EDIT";
+import static cg.wbd.grandemonstration.controller.RequestSupport.*;
 
+public class CustomerController extends HttpServlet {
     private CustomerService customerService = CustomerServiceFactory.getInstance();
 
     @Override
@@ -25,11 +25,6 @@ public class CustomerController extends HttpServlet {
         } else if (isEdit(action)) {
             showInformation(req, resp);
         }
-    }
-
-    private String getActionValue(HttpServletRequest req) {
-        String action = req.getParameter("action");
-        return action == null ? "" : action.toUpperCase();
     }
 
     @Override
@@ -59,11 +54,4 @@ public class CustomerController extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 
-    private boolean isDefault(String action) {
-        return action.isEmpty();
-    }
-
-    private boolean isEdit(String action) {
-        return action.equals(ACTION_EDIT);
-    }
 }
