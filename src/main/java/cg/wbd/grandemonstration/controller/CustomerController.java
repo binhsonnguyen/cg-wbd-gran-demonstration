@@ -16,7 +16,7 @@ public class CustomerController {
 
     @GetMapping("/customers")
     public ModelAndView showList() {
-        ModelAndView modelAndView = new ModelAndView("WEB-INF/templates/customers/list.jsp");
+        ModelAndView modelAndView = new ModelAndView("customers/list");
         List<Customer> customers = customerService.findAll();
         modelAndView.addObject("customers", customers);
         return modelAndView;
