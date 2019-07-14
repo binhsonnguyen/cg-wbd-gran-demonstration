@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
 @Configuration
 @EnableWebMvc
@@ -16,9 +16,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class AppConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/WEB-INF/templates/");
-        viewResolver.setSuffix(".jsp");
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         return viewResolver;
     }
 
