@@ -1,8 +1,4 @@
-<%@ page import="cg.wbd.grandemonstration.model.Customer" %>
-<%@ page import="java.util.List" %>
-<%
-    List<Customer> customers = (List<Customer>) request.getAttribute("customers");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
     table {
         border: 1px solid #000;
@@ -12,7 +8,7 @@
         border: 1px dotted #555;
     }
 </style>
-There are <%= customers.size() %> customer(s) in list.
+There are ${requestScope.customers.size()} customer(s) in list.
 <table>
     <caption>Customers List</caption>
     <thead>
@@ -24,22 +20,21 @@ There are <%= customers.size() %> customer(s) in list.
     </tr>
     </thead>
     <tbody>
-    <% for (Customer c : customers) { %>
+    <c:forEach var="c" items="${requestScope.customers}">
     <tr>
         <td>
-            <%= c.getId() %>
+            <c:out value="${c.id}"/>
         </td>
         <td>
-            <a href="info.jsp?id=<%= c.getId() %>"><%= c.getName() %>
-            </a>
+            <a href="info.jsp?id=${c.id}">${c.name}</a>
         </td>
         <td>
-            <%= c.getEmail() %>
+            <c:out value="${c.email}"/>
         </td>
         <td>
-            <%= c.getAddress() %>
+            <c:out value="${c.address}"/>
         </td>
     </tr>
-    <% } %>
+    </c:forEach>
     </tbody>
 </table>
