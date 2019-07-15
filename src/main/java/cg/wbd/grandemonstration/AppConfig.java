@@ -27,6 +27,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
@@ -83,6 +84,13 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         return dataSource;
     }
 
+    Properties additionalProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        return properties;
+    }
+
     @Bean
     public FactoryBean<EntityManagerFactory> entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -91,6 +99,8 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
+
+        em.setJpaProperties(additionalProperties());
         return em;
     }
 }
