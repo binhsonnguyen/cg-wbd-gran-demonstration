@@ -19,4 +19,5 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-beans', version: '4.3.24.RELEASE'
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.3.Final'
     compile group: 'org.springframework', name: 'spring-orm', version: '4.3.17.RELEASE'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
 }
