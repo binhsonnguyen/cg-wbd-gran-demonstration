@@ -12,6 +12,9 @@ public class Customer implements Cloneable {
     private String name;
     private String email;
     private String address;
+
+    @ManyToOne
+    @JoinColumn(name = "province_id")
     private Province province;
 
     public Customer() {
