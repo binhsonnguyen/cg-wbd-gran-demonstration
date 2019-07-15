@@ -34,7 +34,7 @@ There are <span th:text="${customers.size()}"></span> customer(s).
     </td>
     <td th:text="${c.email}"></td>
     <td th:text="${c.address}"></td>
-    <td th:text="${c.province}"></td>
+    <td th:text="${c.province?.name}"></td>
   </tr>
   </tbody>
 </table>
