@@ -6,10 +6,7 @@ import cg.wbd.grandemonstration.service.CustomerService;
 import cg.wbd.grandemonstration.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -23,6 +20,11 @@ public class CustomerController {
     @Autowired
     private ProvinceService provinceService;
 
+    @ModelAttribute("provinces")
+    public Iterable<Province> allProvinces() {
+        return provinceService.findAll();
+    }
+
     @GetMapping
     public ModelAndView showList() {
         ModelAndView modelAndView = new ModelAndView("customers/list");
@@ -34,13 +36,8 @@ public class CustomerController {
     @GetMapping("{id}")
     public ModelAndView showInformation(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("customers/info");
-
         Customer customer = customerService.findOne(id);
         modelAndView.addObject("customer", customer);
-
-        Iterable<Province> provinces = provinceService.findAll();
-        modelAndView.addObject("provinces", provinces);
-
         return modelAndView;
     }
 
