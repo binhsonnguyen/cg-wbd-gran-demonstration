@@ -2,7 +2,9 @@ package cg.wbd.grandemonstration;
 
 import cg.wbd.grandemonstration.formatter.ProvinceFormatter;
 import cg.wbd.grandemonstration.service.CustomerService;
+import cg.wbd.grandemonstration.service.ProvinceService;
 import cg.wbd.grandemonstration.service.impl.CustomerServiceImplWithSpringData;
+import cg.wbd.grandemonstration.service.impl.ProvinceServiceImplWithSpringData;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.ApplicationContext;
@@ -75,6 +77,11 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     @Bean
     public CustomerService customerService() {
         return new CustomerServiceImplWithSpringData();
+    }
+
+    @Bean
+    public ProvinceService provinceService() {
+        return new ProvinceServiceImplWithSpringData();
     }
 
     @Bean
