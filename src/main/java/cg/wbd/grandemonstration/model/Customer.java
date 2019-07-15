@@ -12,6 +12,7 @@ public class Customer implements Cloneable {
     private String name;
     private String email;
     private String address;
+    private Province province;
 
     public Customer() {
     }
@@ -61,6 +62,14 @@ public class Customer implements Cloneable {
         this.address = address;
     }
 
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
+    }
+
     @Override
     public Customer clone() {
         Customer customer = new Customer();
@@ -68,6 +77,7 @@ public class Customer implements Cloneable {
         customer.setName(name);
         customer.setEmail(email);
         customer.setAddress(address);
+        customer.setProvince(province);
         return customer;
     }
 
@@ -78,6 +88,7 @@ public class Customer implements Cloneable {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
+                ", province=" + province +
                 '}';
     }
 }
