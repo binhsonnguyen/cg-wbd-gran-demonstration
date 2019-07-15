@@ -1,9 +1,8 @@
 package cg.wbd.grandemonstration;
 
 import cg.wbd.grandemonstration.repository.CustomerRepository;
-import cg.wbd.grandemonstration.repository.impl.CustomerRepositoryImpl;
 import cg.wbd.grandemonstration.service.CustomerService;
-import cg.wbd.grandemonstration.service.impl.PersistenceCustomerServiceImpl;
+import cg.wbd.grandemonstration.service.impl.CustomerServiceImplWithSpringData;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.ApplicationContext;
@@ -71,7 +70,7 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 
     @Bean
     public CustomerService customerService() {
-        return new PersistenceCustomerServiceImpl();
+        return new CustomerServiceImplWithSpringData();
     }
 
     @Bean
