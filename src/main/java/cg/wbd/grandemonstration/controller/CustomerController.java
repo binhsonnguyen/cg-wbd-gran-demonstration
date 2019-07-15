@@ -1,7 +1,9 @@
 package cg.wbd.grandemonstration.controller;
 
 import cg.wbd.grandemonstration.model.Customer;
+import cg.wbd.grandemonstration.model.Province;
 import cg.wbd.grandemonstration.service.CustomerService;
+import cg.wbd.grandemonstration.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,9 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private ProvinceService provinceService;
+
     @GetMapping
     public ModelAndView showList() {
         ModelAndView modelAndView = new ModelAndView("customers/list");
@@ -29,8 +34,13 @@ public class CustomerController {
     @GetMapping("{id}")
     public ModelAndView showInformation(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("customers/info");
+
         Customer customer = customerService.findOne(id);
         modelAndView.addObject("customer", customer);
+
+        Iterable<Province> provinces = provinceService.findAll();
+        modelAndView.addObject("provinces", provinces);
+
         return modelAndView;
     }
 
