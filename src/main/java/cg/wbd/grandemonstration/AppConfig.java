@@ -72,6 +72,7 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     @Bean
     public FactoryBean<EntityManagerFactory> entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        em.setPackagesToScan("cg.wbd.grandemonstration.model");
         return em;
     }
 }
