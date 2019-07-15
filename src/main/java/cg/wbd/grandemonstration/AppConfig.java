@@ -25,6 +25,7 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -102,5 +103,10 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 
         em.setJpaProperties(additionalProperties());
         return em;
+    }
+
+    @Bean
+    public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
+        return entityManagerFactory.createEntityManager();
     }
 }
