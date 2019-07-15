@@ -1,5 +1,6 @@
 package cg.wbd.grandemonstration;
 
+import cg.wbd.grandemonstration.formatter.ProvinceFormatter;
 import cg.wbd.grandemonstration.service.CustomerService;
 import cg.wbd.grandemonstration.service.impl.CustomerServiceImplWithSpringData;
 import org.springframework.beans.BeansException;
@@ -10,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.format.Formatter;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -114,5 +117,11 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
         return transactionManager;
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        Formatter provinceFormatter = new ProvinceFormatter();
+        registry.addFormatter(provinceFormatter);
     }
 }
