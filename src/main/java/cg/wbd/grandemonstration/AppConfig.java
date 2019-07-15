@@ -128,7 +128,8 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        Formatter provinceFormatter = new ProvinceFormatter();
+        ProvinceService provinceService = appContext.getBean(ProvinceService.class);
+        Formatter provinceFormatter = new ProvinceFormatter(provinceService);
         registry.addFormatter(provinceFormatter);
     }
 }

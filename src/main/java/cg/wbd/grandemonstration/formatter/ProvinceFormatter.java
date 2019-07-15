@@ -9,8 +9,11 @@ import java.text.ParseException;
 import java.util.Locale;
 
 public class ProvinceFormatter implements Formatter<Province> {
-    @Autowired
     private ProvinceService provinceService;
+
+    public ProvinceFormatter(ProvinceService provinceService) {
+        this.provinceService = provinceService;
+    }
 
     @Override
     public Province parse(String text, Locale locale) throws ParseException {
