@@ -1,6 +1,12 @@
 package cg.wbd.grandemonstration.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Provinces")
 public class Province {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
