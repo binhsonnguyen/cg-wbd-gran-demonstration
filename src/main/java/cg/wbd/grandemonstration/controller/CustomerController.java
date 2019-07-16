@@ -5,12 +5,13 @@ import cg.wbd.grandemonstration.model.Province;
 import cg.wbd.grandemonstration.service.CustomerService;
 import cg.wbd.grandemonstration.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -28,14 +29,18 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ModelAndView showList(Optional<String> s) {
+    public ModelAndView showList(Optional<String> s,
+                                 @RequestParam(defaultValue = "0") int page,
+                                 @RequestParam(defaultValue = "2") int size) {
         ModelAndView modelAndView = new ModelAndView("customers/list");
-        List<Customer> customers;
+
+        Page<Customer> customers;
+        Pageable pageInfo = new PageRequest(page, size);
         if (s.isPresent()) {
-            customers = customerService.search(s.get());
+            customers = customerService.search(s.get(), pageInfo);
             modelAndView.addObject("keyword", s.get());
         } else {
-            customers = customerService.findAll();
+            customers = customerService.findAll(pageInfo);
         }
         modelAndView.addObject("customers", customers);
         return modelAndView;
