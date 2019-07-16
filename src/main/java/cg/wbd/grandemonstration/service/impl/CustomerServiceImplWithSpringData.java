@@ -23,7 +23,7 @@ public class CustomerServiceImplWithSpringData implements CustomerService {
 
     @Override
     public Page<Customer> findAll(Pageable pageInfo) {
-        return null;
+        return customerRepository.findAll(pageInfo);
     }
 
     @Override
