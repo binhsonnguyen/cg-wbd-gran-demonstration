@@ -13,6 +13,8 @@ public interface CustomerService {
 
     List<Customer> search(String keyword);
 
+    Page<Customer> search(String keyword, Pageable pageInfo);
+
     Customer findOne(Long id);
 
     Customer save(Customer customer);

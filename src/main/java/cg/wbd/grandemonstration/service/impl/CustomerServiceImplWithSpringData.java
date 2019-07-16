@@ -34,6 +34,11 @@ public class CustomerServiceImplWithSpringData implements CustomerService {
     }
 
     @Override
+    public Page<Customer> search(String keyword, Pageable pageInfo) {
+        return null;
+    }
+
+    @Override
     public Customer findOne(Long id) {
         return customerRepository.findOne(id);
     }
