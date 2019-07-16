@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -26,9 +27,14 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ModelAndView showList() {
+    public ModelAndView showList(@RequestParam(required = false) String s) {
         ModelAndView modelAndView = new ModelAndView("customers/list");
-        List<Customer> customers = customerService.findAll();
+        List<Customer> customers;
+        if (s != null && !s.isEmpty()) {
+            customers = Collections.emptyList();
+        } else {
+            customers = customerService.findAll();
+        }
         modelAndView.addObject("customers", customers);
         return modelAndView;
     }
