@@ -35,7 +35,8 @@ public class CustomerServiceImplWithSpringData implements CustomerService {
 
     @Override
     public Page<Customer> search(String keyword, Pageable pageInfo) {
-        return null;
+        return customerRepository
+                .findAllByNameContainsOrEmailContainsOrAddressContains(keyword, keyword, keyword, pageInfo);
     }
 
     @Override
