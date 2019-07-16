@@ -21,7 +21,9 @@ public class CustomerServiceImplWithSpringData implements CustomerService {
 
     @Override
     public List<Customer> search(String keyword) {
-        return null;
+        Iterable<Customer> searchResult = customerRepository
+                .findAllByNameContainsOrEmailContainsOrAddressContains(keyword, keyword, keyword);
+        return streamAll(searchResult).collect(Collectors.toList());
     }
 
     @Override
