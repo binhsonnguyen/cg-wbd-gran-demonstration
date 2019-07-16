@@ -32,7 +32,7 @@ public class CustomerController {
         ModelAndView modelAndView = new ModelAndView("customers/list");
         List<Customer> customers;
         if (s.isPresent()) {
-            customers = Collections.emptyList();
+            customers = customerService.search(s.get());
             modelAndView.addObject("keyword", s.get());
         } else {
             customers = customerService.findAll();
