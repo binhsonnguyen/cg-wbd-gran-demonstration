@@ -20,6 +20,11 @@ public class CustomerServiceImplWithSpringData implements CustomerService {
     }
 
     @Override
+    public List<Customer> search(String keyword) {
+        return null;
+    }
+
+    @Override
     public Customer findOne(Long id) {
         return customerRepository.findOne(id);
     }
