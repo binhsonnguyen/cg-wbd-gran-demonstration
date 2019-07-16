@@ -28,7 +28,7 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ModelAndView showList(@RequestParam Optional<String> s) {
+    public ModelAndView showList(Optional<String> s) {
         ModelAndView modelAndView = new ModelAndView("customers/list");
         List<Customer> customers;
         if (s.isPresent()) {
