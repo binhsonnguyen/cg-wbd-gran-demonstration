@@ -29,13 +29,10 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ModelAndView showList(Optional<String> s,
-                                 @RequestParam(defaultValue = "0") int page,
-                                 @RequestParam(defaultValue = "2") int size) {
+    public ModelAndView showList(Optional<String> s, Pageable pageInfo) {
         ModelAndView modelAndView = new ModelAndView("customers/list");
 
         Page<Customer> customers;
-        Pageable pageInfo = new PageRequest(page, size);
         if (s.isPresent()) {
             customers = customerService.search(s.get(), pageInfo);
             modelAndView.addObject("keyword", s.get());
