@@ -4,6 +4,8 @@ import cg.wbd.grandemonstration.model.Customer;
 import cg.wbd.grandemonstration.repository.CustomerRepository;
 import cg.wbd.grandemonstration.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +19,11 @@ public class CustomerServiceImplWithSpringData implements CustomerService {
     @Override
     public List<Customer> findAll() {
         return streamAll().collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<Customer> findAll(Pageable pageInfo) {
+        return null;
     }
 
     @Override
