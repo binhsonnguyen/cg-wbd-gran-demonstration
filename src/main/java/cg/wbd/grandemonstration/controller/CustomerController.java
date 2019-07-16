@@ -33,6 +33,7 @@ public class CustomerController {
         List<Customer> customers;
         if (s.isPresent()) {
             customers = Collections.emptyList();
+            modelAndView.addObject("keyword", s.get());
         } else {
             customers = customerService.findAll();
         }

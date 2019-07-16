@@ -14,6 +14,9 @@
   </style>
 </head>
 <body>
+<span th:if="${keyword}">
+  Search result for <code>"<span th:text="${keyword}"></span>"</code>, <a th:href="@{/customers}">click here to clear</a>.<br>
+</span>
 There are <span th:text="${customers.size()}"></span> customer(s).
 <form>
   <label>
