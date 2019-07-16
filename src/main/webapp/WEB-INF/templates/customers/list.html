@@ -15,6 +15,13 @@
 </head>
 <body>
 There are <span th:text="${customers.size()}"></span> customer(s).
+<form>
+  <label>
+    Search by name or email:
+    <input type="text" name="s">
+  </label>
+  <input type="submit" value="Search">
+</form>
 <table>
   <caption>Customers List</caption>
   <thead>
