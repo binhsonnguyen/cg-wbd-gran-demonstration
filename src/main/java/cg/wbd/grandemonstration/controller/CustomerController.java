@@ -31,14 +31,8 @@ public class CustomerController {
     @GetMapping
     public ModelAndView showList(Optional<String> s, Pageable pageInfo) {
         ModelAndView modelAndView = new ModelAndView("customers/list");
-
-        Page<Customer> customers;
-        if (s.isPresent()) {
-            customers = customerService.search(s.get(), pageInfo);
-            modelAndView.addObject("keyword", s.get());
-        } else {
-            customers = customerService.findAll(pageInfo);
-        }
+        Page<Customer> customers = s.isPresent() ? search(s, pageInfo) : getPage(pageInfo);
+        modelAndView.addObject("keyword", s.orElse(null));
         modelAndView.addObject("customers", customers);
         return modelAndView;
     }
@@ -55,5 +49,13 @@ public class CustomerController {
     public String updateCustomer(Customer customer) {
         customerService.save(customer);
         return "redirect:/customers";
+    }
+
+    private Page<Customer> getPage(Pageable pageInfo) {
+        return customerService.findAll(pageInfo);
+    }
+
+    private Page<Customer> search(Optional<String> s, Pageable pageInfo) {
+        return customerService.search(s.get(), pageInfo);
     }
 }
