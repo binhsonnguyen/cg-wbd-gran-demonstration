@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("customers")
@@ -27,10 +28,10 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ModelAndView showList(@RequestParam(required = false) String s) {
+    public ModelAndView showList(@RequestParam Optional<String> s) {
         ModelAndView modelAndView = new ModelAndView("customers/list");
         List<Customer> customers;
-        if (s != null && !s.isEmpty()) {
+        if (s.isPresent()) {
             customers = Collections.emptyList();
         } else {
             customers = customerService.findAll();
