@@ -7,16 +7,16 @@ import javax.validation.constraints.Size;
 public class Customer implements Cloneable {
     private Long id;
 
-    @NotEmpty
-    @Size(max = 128)
+    @NotEmpty(message = "Needed")
+    @Size(max = 128, message = "Too long")
     private String name;
 
-    @NotEmpty
-    @Email
-    @Size(max = 128)
+    @NotEmpty(message = "Needed")
+    @Email(message = "Not a email")
+    @Size(max = 128, message = "Too long")
     private String email;
 
-    @Size(max = 256)
+    @Size(max = 256, message = "Too long")
     private String address;
 
     public Customer() {
