@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Customer Information</title>
+  <style>
+    .error {
+      color: red;
+      font-size: small;
+    }
+  </style>
 </head>
 <body>
 <form action="/customers" method="post">
@@ -34,7 +40,7 @@
       </tr>
       <tr>
         <td colspan="2">
-          <input type="submit" value="Update">
+          <input type="submit" value="Update"><span class="error" th:if="${#fields.hasErrors()}">There are field error(s).</span>
         </td>
       </tr>
     </table>
