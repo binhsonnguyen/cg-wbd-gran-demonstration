@@ -17,4 +17,5 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.24.RELEASE'
     compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: '3.0.11.RELEASE'
     compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+    compile group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.17.Final'
 }
