@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -37,11 +34,9 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ModelAndView updateCustomer(@Validated Customer customer, BindingResult bindingResult) {
+    public ModelAndView updateCustomer(@Validated @ModelAttribute Customer customer, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
-            ModelAndView modelAndView = new ModelAndView("customers/info");
-            modelAndView.addObject("customer", customer);
-            return modelAndView;
+            return new ModelAndView("customers/info");
         }
         customerService.save(customer);
         return new ModelAndView("redirect:/customers");
