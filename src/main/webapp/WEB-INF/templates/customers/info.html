@@ -24,18 +24,21 @@
         <td>Name</td>
         <td>
           <input type="text" th:field="*{name}">
+          <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
         </td>
       </tr>
       <tr>
         <td>Email</td>
         <td>
           <input type="text" th:field="*{email}">
+          <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
         </td>
       </tr>
       <tr>
         <td>Address</td>
         <td>
           <input type="text" th:field="*{address}">
+          <span class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
         </td>
       </tr>
       <tr>
