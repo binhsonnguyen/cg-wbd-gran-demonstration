@@ -1,9 +1,22 @@
 package cg.wbd.grandemonstration.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class Customer implements Cloneable {
     private Long id;
+
+    @NotEmpty
+    @Size(max = 128)
     private String name;
+
+    @NotEmpty
+    @Email
+    @Size(max = 128)
     private String email;
+
+    @Size(max = 256)
     private String address;
 
     public Customer() {
