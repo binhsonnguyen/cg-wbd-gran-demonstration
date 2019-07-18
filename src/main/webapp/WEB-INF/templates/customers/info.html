@@ -11,10 +11,10 @@
   </style>
 </head>
 <body>
-<form action="/customers" method="post">
+<form action="/customers" method="post" th:object="${customer}">
   <fieldset>
     <legend>Customer Information</legend>
-    <input type="hidden" name="id" th:value="${customer.id}">
+    <input type="hidden" th:field="*{id}">
     <table>
       <tr>
         <td>Id</td>
@@ -23,19 +23,19 @@
       <tr>
         <td>Name</td>
         <td>
-          <input type="text" name="name" th:value="${customer.name}">
+          <input type="text" th:field="*{name}">
         </td>
       </tr>
       <tr>
         <td>Email</td>
         <td>
-          <input type="text" name="email" th:value="${customer.email}">
+          <input type="text" th:field="*{email}">
         </td>
       </tr>
       <tr>
         <td>Address</td>
         <td>
-          <input type="text" name="address" th:value="${customer.address}">
+          <input type="text" th:field="*{address}">
         </td>
       </tr>
       <tr>
