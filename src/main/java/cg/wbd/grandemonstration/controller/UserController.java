@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 public class UserController {
     private static String adminUsername = "admin";
@@ -19,8 +22,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(UserCredential userCredential) {
+    public String login(UserCredential userCredential, HttpServletResponse response) {
         if (authenticated(userCredential)) {
+            Cookie userCredentialCookie = new Cookie("username", userCredential.getUsername());
+            userCredentialCookie.setMaxAge(25);
+            response.addCookie(userCredentialCookie);
             return "redirect:/customers";
         }
         return "redirect:/login";
