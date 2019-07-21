@@ -56,6 +56,14 @@ public class CustomerController {
         return modelAndView;
     }
 
+    @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<Customer> apiInformation(@PathVariable Long id) {
+        Customer customer = customerService.findOne(id);
+        HttpStatus status = customer == null ? HttpStatus.NOT_FOUND : HttpStatus.OK;
+        return new ResponseEntity<>(customer, status);
+    }
+
     @PostMapping
     public ModelAndView updateCustomer(@Validated @ModelAttribute Customer customer, BindingResult bindingResult) {
         if (bindingResult.hasGlobalErrors() || bindingResult.hasFieldErrors()) {
