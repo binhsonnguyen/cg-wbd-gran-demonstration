@@ -51,15 +51,25 @@ public class CustomerController {
     }
 
     private String getUserCredentials(HttpServletRequest request) {
-        String userCredential = "";
-        if (request.getCookies() != null) {
-            for (Cookie ck : request.getCookies()) {
-                if ("username".equals(ck.getName())) {
-                    userCredential = ck.getValue();
-                    break;
-                }
+        Cookie userCredentialCookie = findUserCredentialCookie(request);
+        return userCredentialCookie == null ? "" : userCredentialCookie.getValue();
+    }
+
+    private Cookie findUserCredentialCookie(HttpServletRequest request) {
+        if (request.getCookies() == null) {
+            return null;
+        }
+
+        for (Cookie ck : request.getCookies()) {
+            if (isUserCredentialCookie(ck)) {
+                return ck;
             }
         }
-        return userCredential;
+
+        return null;
+    }
+
+    private boolean isUserCredentialCookie(Cookie cookie) {
+        return "username".equals(cookie.getName());
     }
 }
