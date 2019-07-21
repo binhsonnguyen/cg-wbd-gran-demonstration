@@ -5,6 +5,7 @@
   <title>Customer Information</title>
 </head>
 <body>
+<p th:if="${username}" th:text="'Hello, ' + ${username} + '!'"></p>
 <form action="/customers" method="post">
   <fieldset>
     <legend>Customer Information</legend>
