@@ -3,6 +3,7 @@ package cg.wbd.grandemonstration.controller;
 import cg.wbd.grandemonstration.model.Customer;
 import cg.wbd.grandemonstration.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -35,7 +37,11 @@ public class CustomerController {
     }
 
     @PostMapping
-    public String updateCustomer(Customer customer) {
+    public String updateCustomer(Customer customer, HttpSession session) {
+        String userCredential = (String) session.getAttribute("username");
+        if (userCredential == null || userCredential.isEmpty()) {
+            throw new AuthenticationCredentialsNotFoundException("Authentication credentials not found!");
+        }
         customerService.save(customer);
         return "redirect:/customers";
     }
