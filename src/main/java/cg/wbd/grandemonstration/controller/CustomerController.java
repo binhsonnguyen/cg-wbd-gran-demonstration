@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("customers")
@@ -40,8 +39,8 @@ public class CustomerController {
     }
 
     @PostMapping
-    public String updateCustomer(Customer customer, @SessionAttribute Optional<String> username) {
-        if (username.orElse("").isEmpty()) {
+    public String updateCustomer(Customer customer, @ModelAttribute("username") String username) {
+        if (username.isEmpty()) {
             throw new AuthenticationCredentialsNotFoundException("Authentication credentials not found!");
         }
         customerService.save(customer);
