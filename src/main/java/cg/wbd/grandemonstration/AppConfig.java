@@ -1,9 +1,10 @@
 package cg.wbd.grandemonstration;
 
-import cg.wbd.grandemonstration.repository.CustomerRepository;
-import cg.wbd.grandemonstration.repository.impl.CustomerRepositoryImpl;
+import cg.wbd.grandemonstration.formatter.ProvinceFormatter;
 import cg.wbd.grandemonstration.service.CustomerService;
-import cg.wbd.grandemonstration.service.impl.PersistenceCustomerServiceImpl;
+import cg.wbd.grandemonstration.service.ProvinceService;
+import cg.wbd.grandemonstration.service.impl.CustomerServiceImplWithSpringData;
+import cg.wbd.grandemonstration.service.impl.ProvinceServiceImplWithSpringData;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.ApplicationContext;
@@ -11,6 +12,10 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.format.Formatter;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -36,6 +41,8 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @ComponentScan("cg.wbd.grandemonstration")
+@EnableJpaRepositories("cg.wbd.grandemonstration.repository")
+@EnableSpringDataWebSupport
 @EnableTransactionManagement
 public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
     private ApplicationContext appContext;
@@ -71,12 +78,12 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 
     @Bean
     public CustomerService customerService() {
-        return new PersistenceCustomerServiceImpl();
+        return new CustomerServiceImplWithSpringData();
     }
 
     @Bean
-    public CustomerRepository customerRepository() {
-        return new CustomerRepositoryImpl();
+    public ProvinceService provinceService() {
+        return new ProvinceServiceImplWithSpringData();
     }
 
     @Bean
@@ -119,5 +126,12 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
         return transactionManager;
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        ProvinceService provinceService = appContext.getBean(ProvinceService.class);
+        Formatter provinceFormatter = new ProvinceFormatter(provinceService);
+        registry.addFormatter(provinceFormatter);
     }
 }
