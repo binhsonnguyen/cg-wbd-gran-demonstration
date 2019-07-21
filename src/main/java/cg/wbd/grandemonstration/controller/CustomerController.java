@@ -13,13 +13,14 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("customers")
+@SessionAttributes("username")
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
     @ModelAttribute("username")
-    public String username(@SessionAttribute Optional<String> username) {
-        return username.orElse(null);
+    public String username() {
+        return "";
     }
 
     @GetMapping
