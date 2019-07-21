@@ -3,7 +3,6 @@ package cg.wbd.grandemonstration.controller;
 import cg.wbd.grandemonstration.model.Customer;
 import cg.wbd.grandemonstration.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,7 +40,7 @@ public class CustomerController {
     @PostMapping
     public String updateCustomer(Customer customer, @ModelAttribute("username") String username) {
         if (username.isEmpty()) {
-            throw new AuthenticationCredentialsNotFoundException("Authentication credentials not found!");
+            return "redirect:/login";
         }
         customerService.save(customer);
         return "redirect:/customers";
