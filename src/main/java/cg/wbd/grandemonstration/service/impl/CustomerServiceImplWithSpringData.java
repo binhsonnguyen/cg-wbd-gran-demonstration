@@ -20,6 +20,13 @@ public class CustomerServiceImplWithSpringData implements CustomerService {
     }
 
     @Override
+    public List<Customer> search(String keyword) {
+        Iterable<Customer> searchResult = customerRepository
+                .findAllByNameContainsOrEmailContainsOrAddressContains(keyword, keyword, keyword);
+        return streamAll(searchResult).collect(Collectors.toList());
+    }
+
+    @Override
     public Customer findOne(Long id) {
         return customerRepository.findOne(id);
     }
