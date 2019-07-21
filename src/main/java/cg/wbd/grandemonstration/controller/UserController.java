@@ -8,6 +8,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class UserController {
+    private static String adminUsername = "admin";
+    private static String adminPassword = "123456";
+
     @GetMapping("/login")
     public ModelAndView showLoginForm() {
         ModelAndView modelAndView = new ModelAndView("login");
@@ -17,9 +20,14 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(UserCredential userCredential) {
-        if ("admin".equals(userCredential.getUsername()) && "123456".equals(userCredential.getPassword())) {
+        if (authenticated(userCredential)) {
             return "redirect:/customers";
         }
         return "redirect:/login";
+    }
+
+    private boolean authenticated(UserCredential userCredential) {
+        return adminUsername.equals(userCredential.getUsername())
+                && adminPassword.equals(userCredential.getPassword());
     }
 }
