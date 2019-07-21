@@ -17,6 +17,9 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(UserCredential userCredential) {
-        return "redirect:/customers";
+        if ("admin".equals(userCredential.getUsername()) && "123456".equals(userCredential.getPassword())) {
+            return "redirect:/customers";
+        }
+        return "redirect:/login";
     }
 }
