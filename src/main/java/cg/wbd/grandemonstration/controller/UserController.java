@@ -29,6 +29,10 @@ public class UserController {
             response.addCookie(userCredentialCookie);
             return "redirect:/customers";
         }
+
+        Cookie userCredentialCookie = new Cookie("username", null);
+        userCredentialCookie.setMaxAge(0);
+        response.addCookie(userCredentialCookie);
         return "redirect:/login";
     }
 
