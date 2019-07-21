@@ -5,15 +5,12 @@ import cg.wbd.grandemonstration.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("customers")
@@ -38,38 +35,16 @@ public class CustomerController {
     }
 
     @PostMapping
-    public String updateCustomer(Customer customer, HttpServletRequest request) {
-        userCredentialInterpretation(request);
+    public String updateCustomer(Customer customer,
+                                 @CookieValue("username") Optional<Cookie> userCredentials) {
+        userCredentialInterpretation(userCredentials);
         customerService.save(customer);
         return "redirect:/customers";
     }
 
-    private void userCredentialInterpretation(HttpServletRequest request) {
-        if (getUserCredentials(request).isEmpty()) {
+    private void userCredentialInterpretation(Optional<Cookie> userCredentials) {
+        if (!userCredentials.isPresent()) {
             throw new AuthenticationCredentialsNotFoundException("Authentication credentials not found!");
         }
-    }
-
-    private String getUserCredentials(HttpServletRequest request) {
-        Cookie userCredentialCookie = findUserCredentialCookie(request);
-        return userCredentialCookie == null ? "" : userCredentialCookie.getValue();
-    }
-
-    private Cookie findUserCredentialCookie(HttpServletRequest request) {
-        if (request.getCookies() == null) {
-            return null;
-        }
-
-        for (Cookie ck : request.getCookies()) {
-            if (isUserCredentialCookie(ck)) {
-                return ck;
-            }
-        }
-
-        return null;
-    }
-
-    private boolean isUserCredentialCookie(Cookie cookie) {
-        return "username".equals(cookie.getName());
     }
 }
