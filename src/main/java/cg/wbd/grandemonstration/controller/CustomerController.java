@@ -18,6 +18,11 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @ModelAttribute("username")
+    public String username(@CookieValue("username") Optional<Cookie> userCredentials) {
+        return userCredentials.map(Cookie::getValue).orElse("");
+    }
+
     @GetMapping
     public ModelAndView showList() {
         ModelAndView modelAndView = new ModelAndView("customers/list");
