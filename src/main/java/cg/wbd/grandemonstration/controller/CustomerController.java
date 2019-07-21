@@ -39,12 +39,15 @@ public class CustomerController {
 
     @PostMapping
     public String updateCustomer(Customer customer, HttpServletRequest request) {
+        userCredentialInterpretation(request);
+        customerService.save(customer);
+        return "redirect:/customers";
+    }
+
+    private void userCredentialInterpretation(HttpServletRequest request) {
         if (getUserCredentials(request).isEmpty()) {
             throw new AuthenticationCredentialsNotFoundException("Authentication credentials not found!");
         }
-
-        customerService.save(customer);
-        return "redirect:/customers";
     }
 
     private String getUserCredentials(HttpServletRequest request) {
