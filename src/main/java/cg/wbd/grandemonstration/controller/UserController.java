@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class UserController {
     private static String adminUsername = "admin";
@@ -19,8 +21,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(UserCredential userCredential) {
+    public String login(UserCredential userCredential, HttpSession httpSession) {
         if (authenticated(userCredential)) {
+            httpSession.setAttribute("username", userCredential.getUsername());
             return "redirect:/customers";
         }
         return "redirect:/login";
