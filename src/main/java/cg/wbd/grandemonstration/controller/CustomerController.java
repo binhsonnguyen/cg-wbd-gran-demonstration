@@ -39,6 +39,15 @@ public class CustomerController {
 
     @PostMapping
     public String updateCustomer(Customer customer, HttpServletRequest request) {
+        if (getUserCredentials(request).isEmpty()) {
+            throw new AuthenticationCredentialsNotFoundException("Authentication credentials not found!");
+        }
+
+        customerService.save(customer);
+        return "redirect:/customers";
+    }
+
+    private String getUserCredentials(HttpServletRequest request) {
         String userCredential = "";
         if (request.getCookies() != null) {
             for (Cookie ck : request.getCookies()) {
@@ -48,10 +57,6 @@ public class CustomerController {
                 }
             }
         }
-        if (userCredential.isEmpty()) {
-            throw new AuthenticationCredentialsNotFoundException("Authentication credentials not found!");
-        }
-        customerService.save(customer);
-        return "redirect:/customers";
+        return userCredential;
     }
 }
