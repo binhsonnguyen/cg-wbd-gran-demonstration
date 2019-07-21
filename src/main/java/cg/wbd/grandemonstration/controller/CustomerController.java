@@ -17,6 +17,11 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @ModelAttribute("username")
+    public String username(@SessionAttribute Optional<String> username) {
+        return username.orElse(null);
+    }
+
     @GetMapping
     public ModelAndView showList() {
         ModelAndView modelAndView = new ModelAndView("customers/list");
