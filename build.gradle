@@ -15,4 +15,5 @@ repositories {
 dependencies {
     compile group: 'org.springframework', name: 'spring-beans', version: '4.3.24.RELEASE'
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.3.Final'
+    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.11.22.RELEASE'
 }
