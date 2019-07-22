@@ -2,7 +2,6 @@ package cg.wbd.grandemonstration.controller;
 
 import cg.wbd.grandemonstration.model.Customer;
 import cg.wbd.grandemonstration.service.CustomerService;
-import cg.wbd.grandemonstration.validator.CustomerEmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -36,8 +35,6 @@ public class CustomerController {
 
     @PostMapping
     public ModelAndView updateCustomer(@Validated @ModelAttribute Customer customer, BindingResult bindingResult) {
-        CustomerEmailValidator validator = new CustomerEmailValidator(customerService);
-        validator.validate(customer, bindingResult);
         if (bindingResult.hasGlobalErrors() || bindingResult.hasFieldErrors()) {
             return new ModelAndView("customers/info");
         }
