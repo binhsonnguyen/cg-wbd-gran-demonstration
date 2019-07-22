@@ -32,10 +32,15 @@ public class CustomerEmailValidator implements Validator {
         return customerService
                 .findAll()
                 .stream()
-                .anyMatch(c -> isSameEmail(customer, c));
+                .filter(c -> isSameEmail(customer, c))
+                .anyMatch(c -> !isSameId(customer, c));
     }
 
     private boolean isSameEmail(Customer c1, Customer c2) {
         return Objects.equals(c1.getEmail(), c2.getEmail());
+    }
+
+    private boolean isSameId(Customer c1, Customer c2) {
+        return Objects.equals(c1.getId(), c2.getId());
     }
 }
