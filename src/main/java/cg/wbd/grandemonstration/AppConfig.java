@@ -7,11 +7,13 @@ import cg.wbd.grandemonstration.service.impl.CustomerServiceImplWithSpringData;
 import cg.wbd.grandemonstration.service.impl.ProvinceServiceImplWithSpringData;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.format.Formatter;
@@ -44,8 +46,15 @@ import java.util.Properties;
 @EnableJpaRepositories("cg.wbd.grandemonstration.repository")
 @EnableSpringDataWebSupport
 @EnableTransactionManagement
+@PropertySource("classpath:application.properties")
 public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
     private ApplicationContext appContext;
+
+    @Value("${template.location.prefix}")
+    private String templateLocationPrefix;
+
+    @Value("${template.location.suffix}")
+    private String templateLocationSuffix;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -71,8 +80,8 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     public ITemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(appContext);
-        templateResolver.setPrefix("/WEB-INF/templates/");
-        templateResolver.setSuffix(".html");
+        templateResolver.setPrefix(templateLocationPrefix);
+        templateResolver.setSuffix(templateLocationSuffix);
         templateResolver.setTemplateMode(TemplateMode.HTML);
         templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
