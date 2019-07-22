@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,9 +48,12 @@ public class CustomerController {
     }
 
     @PostMapping
-    public String updateCustomer(Customer customer) {
+    public ModelAndView updateCustomer(@Validated @ModelAttribute Customer customer, BindingResult bindingResult) {
+        if (bindingResult.hasGlobalErrors() || bindingResult.hasFieldErrors()) {
+            return new ModelAndView("customers/info");
+        }
         customerService.save(customer);
-        return "redirect:/customers";
+        return new ModelAndView("redirect:/customers");
     }
 
     private Page<Customer> getPage(Pageable pageInfo) {

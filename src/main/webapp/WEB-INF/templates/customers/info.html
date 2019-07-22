@@ -3,12 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Customer Information</title>
+  <style>
+    .error {
+      color: red;
+      font-size: small;
+    }
+  </style>
 </head>
 <body>
-<form action="/customers" method="post">
+<form action="/customers" method="post" th:object="${customer}">
   <fieldset>
     <legend>Customer Information</legend>
-    <input type="hidden" name="id" th:value="${customer.id}">
+    <input type="hidden" th:field="*{id}">
     <table>
       <tr>
         <td>Id</td>
@@ -17,19 +23,22 @@
       <tr>
         <td>Name</td>
         <td>
-          <input type="text" name="name" th:value="${customer.name}">
+          <input type="text" th:field="*{name}">
+          <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
         </td>
       </tr>
       <tr>
         <td>Email</td>
         <td>
-          <input type="text" name="email" th:value="${customer.email}">
+          <input type="text" th:field="*{email}">
+          <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
         </td>
       </tr>
       <tr>
         <td>Address</td>
         <td>
-          <input type="text" name="address" th:value="${customer.address}">
+          <input type="text" th:field="*{address}">
+          <span class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
         </td>
       </tr>
       <tr>
@@ -43,6 +52,8 @@
       <tr>
         <td colspan="2">
           <input type="submit" value="Update">
+          <span class="error" th:if="${#fields.hasErrors()}">There are field error(s).</span>
+          <span class="error" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"></span>
         </td>
       </tr>
     </table>
