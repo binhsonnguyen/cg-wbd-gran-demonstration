@@ -119,6 +119,19 @@ public class CustomerController {
         return new ResponseEntity<Customer>(originCustomer, HttpStatus.OK);
     }
 
+    @DeleteMapping("{id}")
+    @ResponseBody
+    public ResponseEntity<Void> apiDeleteCustomer(@PathVariable Long id) {
+        Customer target = customerService.findOne(id);
+
+        if (target == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        customerService.delete(target);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     private Page<Customer> getPage(Pageable pageInfo) {
         return customerService.findAll(pageInfo);
     }
