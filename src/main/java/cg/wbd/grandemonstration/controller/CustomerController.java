@@ -92,6 +92,26 @@ public class CustomerController {
         return responseEntity;
     }
 
+    @PutMapping(value = "{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Customer> apiUpdateCustomer(@PathVariable("id") long id,
+                                                      @RequestBody Customer customer) {
+        Customer origin = customerService.findOne(id);
+
+        if (origin == null) {
+            return new ResponseEntity<Customer>(HttpStatus.NOT_FOUND);
+        }
+
+        origin.setName(customer.getName());
+        origin.setEmail(customer.getEmail());
+        origin.setAddress(customer.getAddress());
+        origin.setProvince(customer.getProvince());
+
+        customerService.save(origin);
+        return new ResponseEntity<Customer>(origin, HttpStatus.OK);
+    }
+
     private Page<Customer> getPage(Pageable pageInfo) {
         return customerService.findAll(pageInfo);
     }
