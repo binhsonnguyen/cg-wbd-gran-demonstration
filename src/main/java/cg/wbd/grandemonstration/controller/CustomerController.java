@@ -38,7 +38,7 @@ public class CustomerController {
     public ModelAndView updateCustomer(@Validated @ModelAttribute Customer customer, BindingResult bindingResult) {
         CustomerEmailValidator validator = new CustomerEmailValidator(customerService);
         validator.validate(customer, bindingResult);
-        if (bindingResult.hasFieldErrors()) {
+        if (bindingResult.hasGlobalErrors() || bindingResult.hasFieldErrors()) {
             return new ModelAndView("customers/info");
         }
         customerService.save(customer);
