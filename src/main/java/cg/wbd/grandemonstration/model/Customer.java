@@ -1,9 +1,12 @@
 package cg.wbd.grandemonstration.model;
 
+import cg.wbd.grandemonstration.validator.UniqueEmail;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+@UniqueEmail
 public class Customer implements Cloneable {
     private Long id;
 
