@@ -43,7 +43,9 @@
       </tr>
       <tr>
         <td colspan="2">
-          <input type="submit" value="Update"><span class="error" th:if="${#fields.hasErrors()}">There are field error(s).</span>
+          <input type="submit" value="Update">
+          <span class="error" th:if="${#fields.hasErrors()}">There are field error(s).</span>
+          <span class="error" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"></span>
         </td>
       </tr>
     </table>
