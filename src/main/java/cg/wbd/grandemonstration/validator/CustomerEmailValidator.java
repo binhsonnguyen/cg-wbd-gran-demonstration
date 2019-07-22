@@ -29,13 +29,13 @@ public class CustomerEmailValidator implements Validator {
     }
 
     private boolean isSameEmailWithOther(Customer customer) {
-        String email = customer.getEmail();
-        Customer sameEmailOne = customerService
+        return customerService
                 .findAll()
                 .stream()
-                .filter(c -> Objects.equals(email, c.getEmail()))
-                .findAny()
-                .orElse(null);
-        return sameEmailOne != null && !sameEmailOne.getId().equals(customer.getId());
+                .anyMatch(c -> isSameEmail(customer, c));
+    }
+
+    private boolean isSameEmail(Customer c1, Customer c2) {
+        return Objects.equals(c1.getEmail(), c2.getEmail());
     }
 }
