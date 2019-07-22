@@ -36,7 +36,7 @@ public class CustomerController {
 
     @PostMapping
     public ModelAndView updateCustomer(@Validated @ModelAttribute Customer customer, BindingResult bindingResult) {
-        CustomerEmailValidator validator = new CustomerEmailValidator();
+        CustomerEmailValidator validator = new CustomerEmailValidator(customerService);
         validator.validate(customer, bindingResult);
         if (bindingResult.hasFieldErrors()) {
             return new ModelAndView("customers/info");
