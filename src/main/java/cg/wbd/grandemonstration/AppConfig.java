@@ -56,6 +56,24 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     @Value("${template.location.suffix}")
     private String templateLocationSuffix;
 
+    @Value("${jpa.datasource.driver}")
+    private String datasourceDriver;
+
+    @Value("${jpa.datasource.url}")
+    private String datasourceUrl;
+
+    @Value("${jpa.datasource.username}")
+    private String datasourceUsername;
+
+    @Value("${jpa.datasource.password}")
+    private String datasourcePassword;
+
+    @Value("${hibernate.hbm2ddl.auto}")
+    private String hibernateDdlAuto;
+
+    @Value("${hibernate.dialect}")
+    private String hibernateDialect;
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         appContext = applicationContext;
@@ -100,17 +118,17 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/cms");
-        dataSource.setUsername("root");
-        dataSource.setPassword("123456");
+        dataSource.setDriverClassName(datasourceDriver);
+        dataSource.setUrl(datasourceUrl);
+        dataSource.setUsername(datasourceUsername);
+        dataSource.setPassword(datasourcePassword);
         return dataSource;
     }
 
     Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.setProperty("hibernate.hbm2ddl.auto", hibernateDdlAuto);
+        properties.setProperty("hibernate.dialect", hibernateDialect);
         properties.setProperty("javax.persistence.validation.mode", "none");
         return properties;
     }
