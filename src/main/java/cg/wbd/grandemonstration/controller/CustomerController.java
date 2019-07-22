@@ -97,19 +97,26 @@ public class CustomerController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> apiUpdateCustomer(@PathVariable("id") long id,
                                                       @RequestBody Customer customer) {
-        Customer origin = customerService.findOne(id);
+        Customer originCustomer = customerService.findOne(id);
 
-        if (origin == null) {
+        if (originCustomer == null) {
             return new ResponseEntity<Customer>(HttpStatus.NOT_FOUND);
         }
 
-        origin.setName(customer.getName());
-        origin.setEmail(customer.getEmail());
-        origin.setAddress(customer.getAddress());
-        origin.setProvince(customer.getProvince());
+        originCustomer.setName(customer.getName());
+        originCustomer.setEmail(customer.getEmail());
+        originCustomer.setAddress(customer.getAddress());
 
-        customerService.save(origin);
-        return new ResponseEntity<Customer>(origin, HttpStatus.OK);
+        if (customer.getProvince() != null) {
+            Province originProvince = provinceService.findOne(customer.getProvince().getId());
+            if (originProvince == null) {
+                return new ResponseEntity<Customer>(HttpStatus.BAD_REQUEST);
+            }
+            originCustomer.setProvince(originProvince);
+        }
+
+        customerService.save(originCustomer);
+        return new ResponseEntity<Customer>(originCustomer, HttpStatus.OK);
     }
 
     private Page<Customer> getPage(Pageable pageInfo) {
