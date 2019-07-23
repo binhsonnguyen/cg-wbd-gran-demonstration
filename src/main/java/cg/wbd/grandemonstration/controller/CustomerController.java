@@ -6,6 +6,7 @@ import cg.wbd.grandemonstration.model.Province;
 import cg.wbd.grandemonstration.service.CustomerService;
 import cg.wbd.grandemonstration.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -37,8 +38,9 @@ public class CustomerController {
     }
 
     @ModelAttribute("messages")
-    public Message messages(@SessionAttribute Optional<Locale> locale) {
-        return Message.getInstance(locale.orElse(Locale.ENGLISH));
+    public Message messages() {
+        Locale locale = LocaleContextHolder.getLocale();
+        return Message.getInstance(locale);
     }
 
     @GetMapping
