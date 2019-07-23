@@ -1,7 +1,6 @@
 package cg.wbd.grandemonstration;
 
 import cg.wbd.grandemonstration.formatter.ProvinceFormatter;
-import cg.wbd.grandemonstration.interceptor.LocaleInterceptor;
 import cg.wbd.grandemonstration.service.CustomerService;
 import cg.wbd.grandemonstration.service.ProvinceService;
 import cg.wbd.grandemonstration.service.impl.CustomerServiceImplWithSpringData;
@@ -26,10 +25,13 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
@@ -40,6 +42,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.Locale;
 import java.util.Properties;
 
 @Configuration
@@ -169,6 +172,15 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LocaleInterceptor("lang"));
+        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+        interceptor.setParamName("lang");
+        registry.addInterceptor(interceptor);
+    }
+
+    @Bean
+    public LocaleResolver localeResolver() {
+        SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+        localeResolver.setDefaultLocale(Locale.ENGLISH);
+        return localeResolver;
     }
 }
