@@ -37,7 +37,7 @@ public class CustomerController {
 
     @ModelAttribute("messages")
     public Message messages() {
-        return new Message();
+        return Message.getInstance();
     }
 
     @GetMapping

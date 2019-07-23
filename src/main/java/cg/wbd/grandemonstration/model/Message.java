@@ -1,6 +1,18 @@
 package cg.wbd.grandemonstration.model;
 
 public class Message {
+    private static Message singleton;
+
+    private Message() {
+    }
+
+    public static Message getInstance() {
+        if (singleton == null) {
+            singleton = new Message();
+        }
+        return singleton;
+    }
+
     public String getCustomerName() {
         return "Name must not be empty, max 128 characters";
     }
