@@ -1,6 +1,7 @@
 package cg.wbd.grandemonstration;
 
 import cg.wbd.grandemonstration.formatter.ProvinceFormatter;
+import cg.wbd.grandemonstration.interceptor.LocaleInterceptor;
 import cg.wbd.grandemonstration.service.CustomerService;
 import cg.wbd.grandemonstration.service.ProvinceService;
 import cg.wbd.grandemonstration.service.impl.CustomerServiceImplWithSpringData;
@@ -27,6 +28,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -163,5 +165,10 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         ProvinceService provinceService = appContext.getBean(ProvinceService.class);
         Formatter provinceFormatter = new ProvinceFormatter(provinceService);
         registry.addFormatter(provinceFormatter);
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LocaleInterceptor());
     }
 }
