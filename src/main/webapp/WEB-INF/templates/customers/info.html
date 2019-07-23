@@ -27,21 +27,21 @@
         <td>Name</td>
         <td>
           <input type="text" th:field="*{name}">
-          <span class="error" th:if="${#fields.hasErrors('name')}" th:text="${messages.customerName}"></span>
+          <span class="error" th:if="${#fields.hasErrors('name')}" th:text="${messages.getMessage('error.customer.name')}"></span>
         </td>
       </tr>
       <tr>
         <td>Email</td>
         <td>
           <input type="text" th:field="*{email}">
-          <span class="error" th:if="${#fields.hasErrors('email')}" th:text="${messages.customerEmail}"></span>
+          <span class="error" th:if="${#fields.hasErrors('email')}" th:text="${messages.getMessage('error.customer.email')}"></span>
         </td>
       </tr>
       <tr>
         <td>Address</td>
         <td>
           <input type="text" th:field="*{address}">
-          <span class="error" th:if="${#fields.hasErrors('address')}" th:text="${messages.customerAddress}"></span>
+          <span class="error" th:if="${#fields.hasErrors('address')}" th:text="${messages.getMessage('error.customer.address')}"></span>
         </td>
       </tr>
       <tr>
@@ -55,8 +55,8 @@
       <tr>
         <td colspan="2">
           <input type="submit" value="Update">
-          <span class="error" th:if="${#fields.hasErrors()}" th:text="${messages.customerFields + '. '}"></span>
-          <span class="error" th:if="${#fields.hasGlobalErrors()}" th:text="${messages.customerGlobal}"></span>
+          <span class="error" th:if="${#fields.hasErrors()}" th:text="${messages.getMessage('error.customer.fields') + '. '}"></span>
+          <span class="error" th:if="${#fields.hasGlobalErrors()}" th:text="${messages.getMessage('error.customer.global')}"></span>
         </td>
       </tr>
     </table>

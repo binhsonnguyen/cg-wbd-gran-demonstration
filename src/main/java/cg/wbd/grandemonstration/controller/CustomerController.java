@@ -40,7 +40,7 @@ public class CustomerController {
     @ModelAttribute("messages")
     public Message messages() {
         Locale locale = LocaleContextHolder.getLocale();
-        return Message.getInstance(locale);
+        return new Message(locale);
     }
 
     @GetMapping
