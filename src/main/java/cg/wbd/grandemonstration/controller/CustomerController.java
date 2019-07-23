@@ -1,6 +1,7 @@
 package cg.wbd.grandemonstration.controller;
 
 import cg.wbd.grandemonstration.model.Customer;
+import cg.wbd.grandemonstration.model.Message;
 import cg.wbd.grandemonstration.model.Province;
 import cg.wbd.grandemonstration.service.CustomerService;
 import cg.wbd.grandemonstration.service.ProvinceService;
@@ -32,6 +33,11 @@ public class CustomerController {
     @ModelAttribute("provinces")
     public Iterable<Province> allProvinces() {
         return provinceService.findAll();
+    }
+
+    @ModelAttribute("messages")
+    public Message messages() {
+        return new Message();
     }
 
     @GetMapping
