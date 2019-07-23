@@ -169,6 +169,6 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LocaleInterceptor());
+        registry.addInterceptor(new LocaleInterceptor("lang"));
     }
 }
