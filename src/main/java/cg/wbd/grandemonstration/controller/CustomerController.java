@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpSession;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -37,12 +38,19 @@ public class CustomerController {
     }
 
     @ModelAttribute("messages")
-    public Message messages() {
-        return Message.getInstance(Locale.ENGLISH);
+    public Message messages(@SessionAttribute Optional<Locale> locale) {
+        return Message.getInstance(locale.orElse(Locale.ENGLISH));
     }
 
     @GetMapping
-    public ModelAndView showList(Optional<String> s, Pageable pageInfo) {
+    public ModelAndView showList(Optional<String> s,
+                                 Pageable pageInfo,
+                                 Optional<String> lang,
+                                 HttpSession httpSession) {
+        if (lang.isPresent()) {
+            httpSession.setAttribute("locale", Locale.forLanguageTag(lang.get()));
+        }
+
         ModelAndView modelAndView = new ModelAndView("customers/list");
         Page<Customer> customers = s.isPresent() ? search(s, pageInfo) : getPage(pageInfo);
         modelAndView.addObject("keyword", s.orElse(null));
