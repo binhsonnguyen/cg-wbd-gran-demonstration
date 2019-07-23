@@ -15,16 +15,16 @@ public class Customer implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Needed")
-    @Size(max = 128, message = "Too long")
+    @NotEmpty
+    @Size(max = 128)
     private String name;
 
-    @NotEmpty(message = "Needed")
-    @Email(message = "Not a email")
-    @Size(max = 128, message = "Too long")
+    @NotEmpty
+    @Email
+    @Size(max = 128)
     private String email;
 
-    @Size(max = 256, message = "Too long")
+    @Size(max = 256)
     private String address;
 
     @ManyToOne
