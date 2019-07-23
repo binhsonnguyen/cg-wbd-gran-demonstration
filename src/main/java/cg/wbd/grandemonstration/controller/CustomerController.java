@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Locale;
 import java.util.Optional;
 
 @Controller
@@ -37,7 +38,7 @@ public class CustomerController {
 
     @ModelAttribute("messages")
     public Message messages() {
-        return Message.getInstance();
+        return Message.getInstance(Locale.ENGLISH);
     }
 
     @GetMapping
