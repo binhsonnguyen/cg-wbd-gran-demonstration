@@ -33,6 +33,9 @@ public class CustomerController {
     @Autowired
     private ProvinceService provinceService;
 
+    @Autowired
+    private MessageSource messageSource;
+
     @ModelAttribute("provinces")
     public Iterable<Province> allProvinces() {
         return provinceService.findAll();
@@ -40,9 +43,6 @@ public class CustomerController {
 
     @ModelAttribute("messages")
     public MessageSource messages() {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("message");
-        messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
 
