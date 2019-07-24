@@ -33,22 +33,9 @@ public class CustomerController {
     @Autowired
     private ProvinceService provinceService;
 
-    @Autowired
-    private MessageSource messageSource;
-
     @ModelAttribute("provinces")
     public Iterable<Province> allProvinces() {
         return provinceService.findAll();
-    }
-
-    @ModelAttribute("messages")
-    public MessageSource messages() {
-        return messageSource;
-    }
-
-    @ModelAttribute("locale")
-    public Locale locale() {
-        return LocaleContextHolder.getLocale();
     }
 
     @GetMapping
