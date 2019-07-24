@@ -5,9 +5,6 @@ import cg.wbd.grandemonstration.model.Province;
 import cg.wbd.grandemonstration.service.CustomerService;
 import cg.wbd.grandemonstration.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -21,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Locale;
 import java.util.Optional;
 
 @Controller
@@ -33,22 +29,9 @@ public class CustomerController {
     @Autowired
     private ProvinceService provinceService;
 
-    @Autowired
-    private MessageSource messageSource;
-
     @ModelAttribute("provinces")
     public Iterable<Province> allProvinces() {
         return provinceService.findAll();
-    }
-
-    @ModelAttribute("messages")
-    public MessageSource messages() {
-        return messageSource;
-    }
-
-    @ModelAttribute("locale")
-    public Locale locale() {
-        return LocaleContextHolder.getLocale();
     }
 
     @GetMapping
