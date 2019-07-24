@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!--/*@thymesVar id="customer" type="cg.wbd.grandemonstration.model.Customer"*/-->
-<!--/*@thymesVar id="messages" type="cg.wbd.grandemonstration.model.Message"*/-->
 <!--/*@thymesVar id="provinces" type="java.lang.Iterable<cg.wbd.grandemonstration.model.Province>"*/-->
+<!--/*@thymesVar id="messages" type="org.springframework.context.MessageSource"*/-->
+<!--/*@thymesVar id="locale" type="java.util.Locale"*/-->
 <head>
   <meta charset="UTF-8">
   <title>Customer Information</title>
@@ -27,21 +28,23 @@
         <td>Name</td>
         <td>
           <input type="text" th:field="*{name}">
-          <span class="error" th:if="${#fields.hasErrors('name')}" th:text="${messages.getMessage('error.customer.name')}"></span>
+          <span class="error" th:if="${#fields.hasErrors('name')}" th:text="${messages.getMessage('error.customer.name', null, locale)}"></span>
         </td>
       </tr>
       <tr>
         <td>Email</td>
         <td>
           <input type="text" th:field="*{email}">
-          <span class="error" th:if="${#fields.hasErrors('email')}" th:text="${messages.getMessage('error.customer.email')}"></span>
+          <span class="error" th:if="${#fields.hasErrors('email')}"
+                th:text="${messages.getMessage('error.customer.email', null, locale)}"></span>
         </td>
       </tr>
       <tr>
         <td>Address</td>
         <td>
           <input type="text" th:field="*{address}">
-          <span class="error" th:if="${#fields.hasErrors('address')}" th:text="${messages.getMessage('error.customer.address')}"></span>
+          <span class="error" th:if="${#fields.hasErrors('address')}"
+                th:text="${messages.getMessage('error.customer.address', null, locale)}"></span>
         </td>
       </tr>
       <tr>
@@ -55,8 +58,10 @@
       <tr>
         <td colspan="2">
           <input type="submit" value="Update">
-          <span class="error" th:if="${#fields.hasErrors()}" th:text="${messages.getMessage('error.customer.fields') + '. '}"></span>
-          <span class="error" th:if="${#fields.hasGlobalErrors()}" th:text="${messages.getMessage('error.customer.global')}"></span>
+          <span class="error" th:if="${#fields.hasErrors()}"
+                th:text="${messages.getMessage('error.customer.fields', null, locale) + '. '}"></span>
+          <span class="error" th:if="${#fields.hasGlobalErrors()}"
+                th:text="${messages.getMessage('error.customer.global', null, locale)}"></span>
         </td>
       </tr>
     </table>

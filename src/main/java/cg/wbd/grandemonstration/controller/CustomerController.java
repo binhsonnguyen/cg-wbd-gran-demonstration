@@ -1,12 +1,13 @@
 package cg.wbd.grandemonstration.controller;
 
 import cg.wbd.grandemonstration.model.Customer;
-import cg.wbd.grandemonstration.model.Message;
 import cg.wbd.grandemonstration.model.Province;
 import cg.wbd.grandemonstration.service.CustomerService;
 import cg.wbd.grandemonstration.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -38,9 +39,16 @@ public class CustomerController {
     }
 
     @ModelAttribute("messages")
-    public Message messages() {
-        Locale locale = LocaleContextHolder.getLocale();
-        return new Message(locale);
+    public MessageSource messages() {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasename("message");
+        messageSource.setDefaultEncoding("UTF-8");
+        return messageSource;
+    }
+
+    @ModelAttribute("locale")
+    public Locale locale() {
+        return LocaleContextHolder.getLocale();
     }
 
     @GetMapping
