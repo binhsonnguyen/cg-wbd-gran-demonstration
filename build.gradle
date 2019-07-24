@@ -24,4 +24,5 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.17.Final'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.5.3'
     compile group: 'org.springframework.security', name: 'spring-security-config', version: '4.2.3.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.2.3.RELEASE'
 }
