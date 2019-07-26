@@ -15,12 +15,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/customers/**").authenticated()
+        http.authorizeRequests().antMatchers("/customers/{id}/**").hasRole(Roles.STAFF)
+                .and().authorizeRequests().antMatchers("/customers/**").authenticated()
                 .and().authorizeRequests().antMatchers("/**").permitAll()
                 .and().formLogin();
     }
 
     private interface Roles {
         String USER = "1";
+        String STAFF = "2";
     }
 }
