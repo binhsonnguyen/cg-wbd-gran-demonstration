@@ -7,10 +7,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    private static final String ROLE_USER = "1";
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("user1").password("secret").roles("USER");
+                .withUser("user1").password("secret").roles(ROLE_USER);
     }
 
     @Override
