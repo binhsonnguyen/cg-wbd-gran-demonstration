@@ -13,7 +13,7 @@
 </head>
 <body>
 <div sec:authorize="isAuthenticated()">
-  <span sec:authentication="principal.username"></span>
+  <span sec:authentication="principal.username"></span>, <a href="/logout">logout</a>.
 </div>
 <hr>
 <form action="/customers" method="post" th:object="${customer}">
