@@ -16,7 +16,7 @@ public abstract class AbstractEntityServiceImplWithSpringData<E, I extends Seria
     }
 
     public E findOne(I id) {
-        return repository().findOne(id);
+        return repository().findById(id).orElse(null);
     }
 
     public E save(E E) {
@@ -24,16 +24,16 @@ public abstract class AbstractEntityServiceImplWithSpringData<E, I extends Seria
     }
 
     public List<E> save(List<E> Es) {
-        Iterable<E> updatedEs = repository().save(Es);
+        Iterable<E> updatedEs = repository().saveAll(Es);
         return streamAll(updatedEs).collect(Collectors.toList());
     }
 
     public boolean exists(I id) {
-        return repository().exists(id);
+        return repository().existsById(id);
     }
 
     public List<E> findAll(List<I> ids) {
-        Iterable<E> Es = repository().findAll(ids);
+        Iterable<E> Es = repository().findAllById(ids);
         return streamAll(Es).collect(Collectors.toList());
     }
 
@@ -42,7 +42,7 @@ public abstract class AbstractEntityServiceImplWithSpringData<E, I extends Seria
     }
 
     public void delete(I id) {
-        repository().delete(id);
+        repository().deleteById(id);
     }
 
     public void delete(E E) {
@@ -50,7 +50,7 @@ public abstract class AbstractEntityServiceImplWithSpringData<E, I extends Seria
     }
 
     public void delete(List<E> Es) {
-        repository().delete(Es);
+        repository().deleteAll(Es);
     }
 
     public void deleteAll() {
