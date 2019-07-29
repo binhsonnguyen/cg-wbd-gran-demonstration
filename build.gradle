@@ -21,17 +21,10 @@ repositories {
 }
 
 dependencies {
-    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
-    compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.24.RELEASE'
-    compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: '3.0.11.RELEASE'
-    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.3.Final'
-    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.11.22.RELEASE'
-    compile group: 'org.springframework', name: 'spring-orm', version: '4.3.17.RELEASE'
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
-    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
-    compile group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.17.Final'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.5.3'
-    compile group: 'org.springframework.security', name: 'spring-security-config', version: '4.2.3.RELEASE'
-    compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.2.3.RELEASE'
-    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.4.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'mysql:mysql-connector-java'
 }
