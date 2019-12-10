@@ -28,3 +28,17 @@ dependencies {
     testCompile group: 'org.junit.platform', name: 'junit-platform-commons', version: '1.2.0'
     testCompile group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.2.0'
 }
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "PASSED", "STARTED", "FAILED", "SKIPPED", "STANDARD_OUT", "STANDARD_ERROR"
+    }
+    afterTest { desc, result ->
+        println "Testing ${desc.name} [${desc.className}]: ${result.resultType}"
+    }
+    reports {
+        html.enabled = true
+    }
+}
