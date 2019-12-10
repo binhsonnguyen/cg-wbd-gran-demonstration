@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @WebAppConfiguration
 @SpringJUnitJupiterConfig(CustomerControllerTestConfig.class)
@@ -35,6 +36,7 @@ public class CustomerControllerTest {
     MockitoAnnotations.initMocks(this);
     mockMvc = MockMvcBuilders
         .standaloneSetup(customerController)
+        .setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
         .build();
   }
 
