@@ -1,9 +1,13 @@
 package cg.wbd.grandemonstration.controller;
 
+import cg.wbd.grandemonstration.service.CustomerService;
+import cg.wbd.grandemonstration.service.ProvinceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit.jupiter.SpringJUnitJupiterConfig;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,6 +23,12 @@ public class CustomerControllerTest {
 
   @InjectMocks
   private CustomerController customerController;
+
+  @Autowired
+  private CustomerService customerService;
+
+  @Autowired
+  private ProvinceService provinceService;
 
   @BeforeEach
   void setUp() {
