@@ -41,9 +41,10 @@ public class CustomerControllerTest {
   }
 
   @Test
-  void testThatCustomersListPageIsExists() throws Exception {
+  void testCustomerBrowseControlling() throws Exception {
     mockMvc
         .perform(get("/customers"))
-        .andExpect(status().is(200));
+        .andExpect(status().is(200))
+        .andExpect(view().name("customers/browse"));
   }
 }
