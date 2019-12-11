@@ -45,7 +45,7 @@ public class CustomerControllerTest {
   }
 
   @Test
-  void testCustomerBrowseControlling() throws Exception {
+  void customerBrowseControlling() throws Exception {
     mockMvc
         .perform(get("/customers"))
         .andExpect(status().isOk())
@@ -53,7 +53,7 @@ public class CustomerControllerTest {
   }
 
   @Test
-  void testCustomerUpdateSuccessControlling() throws Exception {
+  void customerUpdateSuccessControlling() throws Exception {
     Customer foo = new Customer(1L, "Foo Bar", "a@dummy.im", "Nowhere");
     when(customerService.save(isA(Customer.class))).thenReturn(foo);
 
