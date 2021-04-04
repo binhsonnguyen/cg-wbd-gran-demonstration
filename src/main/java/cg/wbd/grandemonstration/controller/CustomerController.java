@@ -4,12 +4,10 @@ import cg.wbd.grandemonstration.model.Customer;
 import cg.wbd.grandemonstration.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @Controller
@@ -17,6 +15,11 @@ import java.util.List;
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
+
+    @ExceptionHandler(NoResultException.class)
+    public String gotoListAtLeast(NoResultException e) {
+        return "redirect:/customers";
+    }
 
     @GetMapping
     public ModelAndView showList() {
@@ -28,14 +31,10 @@ public class CustomerController {
 
     @GetMapping("{id}")
     public ModelAndView showInformation(@PathVariable Long id) {
-        try {
-            ModelAndView modelAndView = new ModelAndView("customers/info");
-            Customer customer = customerService.findOne(id);
-            modelAndView.addObject("customer", customer);
-            return modelAndView;
-        } catch (Exception e) {
-            return new ModelAndView("redirect:/customers");
-        }
+        ModelAndView modelAndView = new ModelAndView("customers/info");
+        Customer customer = customerService.findOne(id);
+        modelAndView.addObject("customer", customer);
+        return modelAndView;
     }
 
     @PostMapping
