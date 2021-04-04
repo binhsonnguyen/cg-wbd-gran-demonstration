@@ -1,5 +1,6 @@
 package cg.wbd.grandemonstration;
 
+import cg.wbd.grandemonstration.concern.Logger;
 import cg.wbd.grandemonstration.repository.CustomerRepository;
 import cg.wbd.grandemonstration.repository.impl.CustomerRepositoryImpl;
 import cg.wbd.grandemonstration.service.CustomerService;
@@ -121,5 +122,10 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
         return transactionManager;
+    }
+
+    @Bean
+    public Logger logger() {
+        return new Logger();
     }
 }
