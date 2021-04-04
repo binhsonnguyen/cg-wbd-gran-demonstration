@@ -4,7 +4,6 @@ import cg.wbd.grandemonstration.model.Customer;
 import cg.wbd.grandemonstration.repository.CustomerRepository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
@@ -21,13 +20,9 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     public Customer findById(Long id) {
-        try {
-            TypedQuery<Customer> query = em.createQuery("select c from Customer c where  c.id=:id", Customer.class);
-            query.setParameter("id", id);
-            return query.getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
+        TypedQuery<Customer> query = em.createQuery("select c from Customer c where  c.id=:id", Customer.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
     }
 
     public void save(Customer customer) {
